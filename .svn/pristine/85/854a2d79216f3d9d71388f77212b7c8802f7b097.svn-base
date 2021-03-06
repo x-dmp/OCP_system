@@ -1,0 +1,44 @@
+package cn.edu.cuit.dao;
+
+import cn.edu.cuit.model.entity.OperAccount;
+import org.apache.ibatis.annotations.*;
+
+import java.util.List;
+
+@Mapper
+public interface OperAccountDAO {
+    /**
+     * @description: DAO Operation
+     * @author: zaoweiceng
+     * @time: 2020/12/25 15:51
+     */
+
+    @Select("select * from oper_account where oper_user_name = #{oper_user_name}")
+    List<OperAccount> findAccountByAccountName(String oper_user_name);
+
+    @Insert("insert into oper_account(oper_user_name, oper_password, oper_real_name, sub_organ, pro_line, role_department, oper_sex, oper_tele_number, oper_email, oper_state) " +
+            "values (#{operUserName}, #{operPassWord}, #{operRealName}, #{subOrgan}, #{proLine}, #{roleDepartment}, #{operSex}, #{operTeleNumber}, #{operEmail}, #{operState})")
+    @Options(useGeneratedKeys=true, keyProperty="id", keyColumn="id")
+    void insertIntoAccount(OperAccount operAccount);
+
+    @Select({"<script> " +
+            "select * oper_account " +
+            "where 1=1 " +
+            "<if test='operUserName!=null'> and oper_user_name = #{operUserName}</if> " +
+            "<if test='operState!=null'> and oper_state = #{operState}</if> " +
+            "<if test='roleDepartment!=null'> and role_department = #{roleDepartment}</if> " +
+            "<if test='operRealName!=null'> and oper_real_name = #{operRealName}</if> " +
+            "<if test='operTeleNumber!=null'> and oper_tele_number = #{operTeleNumber}</if> " +
+            "<if test='operSex!=null'> and oper_sex = #{operSex}</if> " +
+            "</script>"})
+    List<OperAccount> findAccountByPage(String operUserName, Integer operState, String roleDepartment, String operRealName, String operTeleNumber, Integer operSex);
+
+    @Update("UPDATE oper_account set oper_state = #{oper_state} WHERE id = #{id}")
+    void changeAccountStatus(Integer id, Integer oper_state);
+
+    @Update("UPDATE account_role set role_id = #{role_id} WHERE account_id = #{account_id}")
+    void changeAccountRole(Integer account_id, Integer role_id);
+
+    @Delete("DELETE FROM oper_account WHERE id = #{id}")
+    void deleteAccountById(Integer id);
+}

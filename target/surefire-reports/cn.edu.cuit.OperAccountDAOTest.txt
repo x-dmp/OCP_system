@@ -1,0 +1,26 @@
+-------------------------------------------------------------------------------
+Test set: cn.edu.cuit.OperAccountDAOTest
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 3.653 s <<< FAILURE! - in cn.edu.cuit.OperAccountDAOTest
+findAccountByAccountNameTest  Time elapsed: 1.355 s  <<< ERROR!
+org.mybatis.spring.MyBatisSystemException: 
+nested exception is org.apache.ibatis.exceptions.PersistenceException: 
+### Error querying database.  Cause: org.springframework.jdbc.CannotGetJdbcConnectionException: Failed to obtain JDBC Connection; nested exception is java.sql.SQLException: Access denied for user 'root'@'localhost' (using password: YES)
+### The error may exist in cn/edu/cuit/dao/OperAccountDAO.java (best guess)
+### The error may involve cn.edu.cuit.dao.OperAccountDAO.findAccountByAccountName
+### The error occurred while executing a query
+### Cause: org.springframework.jdbc.CannotGetJdbcConnectionException: Failed to obtain JDBC Connection; nested exception is java.sql.SQLException: Access denied for user 'root'@'localhost' (using password: YES)
+	at cn.edu.cuit.OperAccountDAOTest.findAccountByAccountNameTest(OperAccountDAOTest.java:24)
+Caused by: org.apache.ibatis.exceptions.PersistenceException: 
+
+### Error querying database.  Cause: org.springframework.jdbc.CannotGetJdbcConnectionException: Failed to obtain JDBC Connection; nested exception is java.sql.SQLException: Access denied for user 'root'@'localhost' (using password: YES)
+### The error may exist in cn/edu/cuit/dao/OperAccountDAO.java (best guess)
+### The error may involve cn.edu.cuit.dao.OperAccountDAO.findAccountByAccountName
+### The error occurred while executing a query
+### Cause: org.springframework.jdbc.CannotGetJdbcConnectionException: Failed to obtain JDBC Connection; nested exception is java.sql.SQLException: Access denied for user 'root'@'localhost' (using password: YES)
+	at cn.edu.cuit.OperAccountDAOTest.findAccountByAccountNameTest(OperAccountDAOTest.java:24)
+Caused by: org.springframework.jdbc.CannotGetJdbcConnectionException: Failed to obtain JDBC Connection; nested exception is java.sql.SQLException: Access denied for user 'root'@'localhost' (using password: YES)
+	at cn.edu.cuit.OperAccountDAOTest.findAccountByAccountNameTest(OperAccountDAOTest.java:24)
+Caused by: java.sql.SQLException: Access denied for user 'root'@'localhost' (using password: YES)
+	at cn.edu.cuit.OperAccountDAOTest.findAccountByAccountNameTest(OperAccountDAOTest.java:24)
+

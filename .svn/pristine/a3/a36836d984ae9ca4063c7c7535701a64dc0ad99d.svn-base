@@ -1,0 +1,35 @@
+package cn.edu.cuit.controller;
+
+import cn.edu.cuit.model.bo.Response;
+import cn.edu.cuit.model.entity.OperRole;
+import cn.edu.cuit.service.IOperService;
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
+
+@Controller
+@CrossOrigin
+@RequestMapping("/role/")
+public class OperRoleController {
+
+    @Autowired
+    private IOperService operService;
+
+    @RequestMapping(value = "insert", method = RequestMethod.PUT, produces = "application/json;charset=UTF-8")
+    public @ResponseBody Response OperRoleInsert(@RequestBody Map<String, Object> data){
+        Gson gson = new Gson();
+        OperRole operRole= gson.fromJson((JsonElement) data.get("account"), OperRole.class);
+        return operService.insertOperRole(operRole);
+    }
+
+    @RequestMapping(value = "delete", method = RequestMethod.DELETE)
+    public @ResponseBody Response OperRoleDelete(Integer id){
+        return operService.delOperRole(id);
+    }
+
+
+}

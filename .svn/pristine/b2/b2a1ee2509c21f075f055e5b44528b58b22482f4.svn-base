@@ -1,0 +1,9 @@
+package cn.edu.cuit.service;
+
+import cn.edu.cuit.model.bo.Response;
+
+public interface IUserService {
+
+    Response operAccountLogin(String operUserName, String operPassWord);
+
+}

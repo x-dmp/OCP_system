@@ -1,0 +1,15 @@
+package cn.edu.cuit.service;
+
+import cn.edu.cuit.model.bo.Response;
+import cn.edu.cuit.model.entity.OperAccount;
+
+public interface IUserService {
+
+    Response operAccountLogin(String operUserName, String operPassWord);
+
+    Response operAccountFind(String operUserName, Integer operState, String roleDepartment, String operRealName, String operTeleNumber, Integer operSex, Integer pagenum, Integer pagesize);
+
+    Response operAccountInsert(OperAccount operAccount);
+
+    Response operAccountExist(String operUserName);
+}

@@ -1,0 +1,28 @@
+spring:
+  application:
+    name: ocp  # 项目名
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver  # >8 + cj
+    url: jdbc:mysql://127.0.0.1/ocp?useUnicode=ture&characterEncoding=UTF-8&serverTimezone=GMT%2B8
+    username: root
+    password: root
+  jackson:
+    default-property-inclusion: non_null  # 非null值才响应 （调试时可以关闭）
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8  # 全用东8区时间
+server:
+  port: 8080  # 启动端口
+  servlet:
+    context-path: /ocp  # 访问虚拟路径，必须以/开头
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true  # java属性驼峰与mysql字段下划线对应关系
+#logging:
+#  level:
+#    cn.edu.cuit.dao: debug
+#  file:
+#    name: E:/ocp/ocp.log
+# 分页pageHelper
+pagehelper:
+  helper-dialect: mysql  # 数据库
+  reasonable: true  # page<1时 page合理化自动变为1

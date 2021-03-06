@@ -1,0 +1,32 @@
+package cn.edu.cuit.service.impl;
+
+import cn.edu.cuit.dao.OperAccountDAO;
+import cn.edu.cuit.model.bo.Response;
+import cn.edu.cuit.model.entity.OperAccount;
+import cn.edu.cuit.service.IUserServie;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+public class UserServiceImp implements IUserServie {
+
+    @Autowired
+    private OperAccountDAO operAccountDAO;
+
+    @Override
+    public Response operAccountLogin(String operUserName, String operPassWord) {
+        String msg = "用户名或密码错误";
+        String code = "404";
+        try {
+            List<OperAccount> accountList = operAccountDAO.findAccountByAccountName(operUserName);
+            if (accountList.size() > 0 && accountList.get(0).getOperPassWord().trim().equals(operPassWord)){
+                code = "200";
+                msg = "登录成功";
+            }
+        } catch (Exception e) {}
+        Response res = new Response(null, code, msg);
+        return res;
+    }
+}

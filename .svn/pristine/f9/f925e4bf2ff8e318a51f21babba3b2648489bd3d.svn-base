@@ -1,0 +1,25 @@
+package cn.edu.cuit.controller;
+
+import cn.edu.cuit.model.bo.Response;
+import cn.edu.cuit.service.IUserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
+
+@Controller
+@CrossOrigin
+@RequestMapping("/users/")
+public class OperAccountController {
+
+    @Autowired
+    private IUserService userService;
+
+    @RequestMapping(value = "login", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+    public @ResponseBody Response accountLogin(@RequestBody Map<String, Object> data){
+        String operUserName = (String) data.get("operUserName");
+        String operPassWord = (String) data.get("operPassWord");
+        return userService.operAccountLogin(operUserName, operPassWord);
+    }
+}

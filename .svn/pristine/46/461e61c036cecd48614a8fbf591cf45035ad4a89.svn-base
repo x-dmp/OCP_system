@@ -1,0 +1,49 @@
+package cn.edu.cuit.service.impl;
+
+import cn.edu.cuit.dao.OperAccountDAO;
+import cn.edu.cuit.model.bo.Response;
+import cn.edu.cuit.model.entity.OperAccount;
+import cn.edu.cuit.service.IUserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.List;
+
+@Service
+public class UserServiceImp implements IUserService {
+
+    @Autowired
+    private OperAccountDAO operAccountDAO;
+
+    @Override
+    public Response operAccountLogin(String operUserName, String operPassWord) {
+        String msg = "用户名或密码错误";
+        String code = "404";
+        try {
+            List<OperAccount> accountList = operAccountDAO.findAccountByAccountName(operUserName);
+            if (accountList.size() > 0 && accountList.get(0).getOperPassWord().trim().equals(operPassWord)){
+                code = "200";
+                msg = "登录成功";
+            }
+        } catch (Exception e) {}
+        Response res = new Response(null, code, msg);
+        return res;
+    }
+
+    public Response operAccountFind(String operUserName, Integer operState, String roleDepartment, String operRealName, String operTeleNumber, Integer operSex) {
+        @RequestParam(name = "query", required = false) String query,
+        @RequestParam(name = "pagenum", defaultValue = "1") Integer pagenum,
+        @RequestParam(name = "pagesize", defaultValue = "5") Integer pagesize)
+
+        String msg = "查询失败";
+        String code = "404";
+        Object data = null;
+        try {
+            List<OperAccount> accountList = operAccountDAO.findAccountByPage(query, pagenum, pagesize)
+        }catch(Exception e){}
+        Response res = new Response(data, code, msg);
+        return res;
+    }
+
+}
